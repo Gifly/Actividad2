@@ -3,11 +3,32 @@ from random import randrange
 from freegames import square, vector
 import random
 
-#prueba
 
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
+
+def colorRand(init):
+    "Randomizes the colors"
+    
+    val=random.randrange(1,6)
+    if val==1:
+        color = 'cyan'
+    if val==2:
+        color = 'black'
+    if val==3:
+        color = 'green'
+    if val==4:
+        color =  'purple'
+    if val==5:
+        color = 'orange'
+    if color==init:
+        color=colorRand(color)
+    return color
+        
+snakeColor=colorRand('red')
+foodColor=colorRand(snakeColor)
+
 
 def foodRand():
     "Change food random position"
@@ -30,7 +51,7 @@ def foodRand():
         if food.y >= -190: #Si la comida está casi en la parte inferior, ya no tomará esta opción
             food.y -= 10 #La comida se moverá una unidad hacia abajo
     
-    
+
 def change(x, y):
     "Change snake direction."
     aim.x = x
@@ -39,6 +60,7 @@ def change(x, y):
 def inside(head):
     "Return True if head inside boundaries."
     return -200 < head.x < 190 and -200 < head.y < 190
+
 
 def move():
     "Move snake forward one segment."
@@ -62,9 +84,9 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, snakeColor)
 
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, foodColor)
     foodRand() #Inicializa el método para mover la comida de manera aleatoria
     update()
     ontimer(move, 100)
