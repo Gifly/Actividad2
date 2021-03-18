@@ -11,23 +11,23 @@ aim = vector(0, -10)
 def colorRand(init):
     "Randomizes the colors"
     
-    val=random.randrange(1,6)
-    if val==1:
-        color = 'cyan'
-    if val==2:
+    val=random.randrange(1,6) #Genera un número del 1 al 5 aleatoriamente 
+    if val==1: #En caso de que sea 1
+        color = 'cyan' 
+    if val==2: #En caso de que sea 2
         color = 'black'
-    if val==3:
+    if val==3: #En caso de que sea 3
         color = 'green'
-    if val==4:
+    if val==4: #En caso de que sea 4
         color =  'purple'
-    if val==5:
+    if val==5: #En caso de que sea 5
         color = 'orange'
     if color==init:
         color=colorRand(color)
     return color
         
-snakeColor=colorRand('red')
-foodColor=colorRand(snakeColor)
+snakeColor=colorRand('red') #Se especificca el color de la serpiente
+foodColor=colorRand(snakeColor) #Se especifica el color de la comida
 
 
 def foodRand():
@@ -84,9 +84,9 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, snakeColor)
+        square(body.x, body.y, 9, snakeColor) #Se utiliza la variable del color de la serpiente 
 
-    square(food.x, food.y, 9, foodColor)
+    square(food.x, food.y, 9, foodColor) #Se utiliza la variable del color de la comida
     foodRand() #Inicializa el método para mover la comida de manera aleatoria
     update()
     ontimer(move, 100)
