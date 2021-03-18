@@ -1,11 +1,34 @@
 from turtle import *
 from random import randrange
 from freegames import square, vector
-#Branch dev
+import random
+
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
+def foodRand():
+    "Change food random position"
+
+    val = random.randrange(1,5) #Genera un número del 1 al 4
+
+    if val == 1: #Si el número aleatorio generado es 1
+        if food.x <= 190: #Si la comida está casi en la orilla derecha, ya no tomará esta opción
+            food.x += 10 #La comida se moverá una unidad a la derecha
+
+    if val == 2: #Si el número aleatorio generado es 2
+        if food.x >= -190: #Si la comida está casi en la orilla izquierda, ya no tomará esta opción
+            food.x -= 10 #La comida se moverá una unidad a la izquierda
+
+    if val == 3: #Si el número aleatorio generado es 3
+        if food.y <= 190: #Si la comida está casi en la parte superior, ya no tomará esta opción
+            food.y += 10 #La comida se moverá una unidad hacia arriba
+
+    if val == 4: #Si el número aleatorio generado es 4
+        if food.y >= -190: #Si la comida está casi en la parte inferior, ya no tomará esta opción
+            food.y -= 10 #La comida se moverá una unidad hacia abajo
+    
+    
 def change(x, y):
     "Change snake direction."
     aim.x = x
@@ -40,6 +63,7 @@ def move():
         square(body.x, body.y, 9, 'black')
 
     square(food.x, food.y, 9, 'green')
+    foodRand() #Inicializa el método para mover la comida de manera aleatoria
     update()
     ontimer(move, 100)
 
